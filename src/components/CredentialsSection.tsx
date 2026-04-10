@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ExternalLink, Award } from 'lucide-react';
+import { EducationCard } from './ui/education-card';
 
 const credentials = [
   {
@@ -67,6 +68,8 @@ export const CredentialsSection: React.FC = () => {
             className="h-1 w-20 bg-blue-500 mx-auto rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"
           ></motion.div>
         </div>
+
+        <EducationCard />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {credentials.map((cred, idx) => (

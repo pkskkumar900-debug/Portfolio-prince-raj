@@ -12,16 +12,50 @@ export const HeroSection: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto"
         >
-          <div className="inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-sm font-medium text-amber-300 backdrop-blur-sm">
+          <div className="inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-sm font-medium text-amber-300 backdrop-blur-sm mb-4">
             <span className="flex h-2 w-2 rounded-full bg-amber-500 mr-2 animate-pulse"></span>
             Available for new projects
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white drop-shadow-lg">
-            Building the future <br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">with AI.</span>
-          </h1>
+          <div className="relative" style={{ perspective: 1000 }}>
+            <motion.h1 
+              className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase italic relative z-10"
+              style={{
+                transformStyle: 'preserve-3d',
+                transform: 'rotateX(10deg)',
+              }}
+            >
+              {/* Blurred background glow layer (soft light) */}
+              <span className="absolute inset-0 text-blue-500 blur-xl opacity-60">
+                Hii I am Prince Raj | Ai developer
+              </span>
+              {/* Main 3D text layer (characteristic blue with dark shadow) */}
+              <span className="relative text-3d-blue-texture">
+                Hii I am Prince Raj | Ai developer
+              </span>
+            </motion.h1>
+          </div>
           
-          <p className="text-lg md:text-xl text-gray-400 max-w-[700px] drop-shadow-md">
+          <div className="relative mt-4" style={{ perspective: 1000 }}>
+            <motion.h2 
+              className="text-2xl md:text-4xl font-bold tracking-tight uppercase italic relative z-10"
+              style={{
+                transformStyle: 'preserve-3d',
+                transform: 'rotateX(5deg)',
+              }}
+            >
+              {/* Blurred background glow layer */}
+              <span className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent blur-lg animate-running-neon opacity-60">
+                Let's Build future with Ai
+              </span>
+              {/* Main 3D text layer */}
+              <span className="relative bg-gradient-to-r from-purple-300 via-pink-400 to-red-400 bg-clip-text text-transparent animate-running-neon text-3d-neon-sub">
+                Let's Build future with Ai
+              </span>
+            </motion.h2>
+          </div>
+          
+          <p className="text-lg md:text-xl text-gray-400 max-w-[700px] drop-shadow-md mt-6">
             Building intelligent systems, automation frameworks, and data-driven solutions to simplify real-world problems.
           </p>
           
