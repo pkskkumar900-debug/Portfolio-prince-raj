@@ -1,12 +1,14 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { SpotlightCard } from './spotlight-card';
 
 export const EducationCard = () => {
   return (
-    <motion.div
+    <SpotlightCard
       whileHover={{ scale: 1.02 }}
       className="relative group w-full rounded-3xl overflow-hidden mb-12"
       style={{ perspective: 1000 }}
+      spotlightColor="rgba(59, 130, 246, 0.2)"
     >
       {/* Outer Glow */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-3xl blur opacity-20 group-hover:opacity-50 transition duration-500" />
@@ -72,6 +74,6 @@ export const EducationCard = () => {
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </SpotlightCard>
   );
 };

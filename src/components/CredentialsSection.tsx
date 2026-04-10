@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ExternalLink, Award } from 'lucide-react';
 import { EducationCard } from './ui/education-card';
+import { SpotlightCard } from './ui/spotlight-card';
 
 const credentials = [
   {
@@ -73,43 +74,47 @@ export const CredentialsSection: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {credentials.map((cred, idx) => (
-            <motion.a
-              href={cred.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="group relative block h-full"
-            >
-              {/* Liquid hover effect background */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-2xl blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
-              
-              <div className="relative h-full bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col overflow-hidden transition-all duration-300 group-hover:bg-white/[0.02] group-hover:border-white/20">
-                {/* Subtle inner glow */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-blue-500/10 blur-[50px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                <div className="flex justify-between items-start mb-4">
-                  <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-shadow">
-                    <Award className="w-6 h-6" />
+              <SpotlightCard
+                key={idx}
+                className="group relative block h-full rounded-2xl"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+              >
+                <a
+                  href={cred.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block h-full"
+                >
+                  {/* Liquid hover effect background */}
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-2xl blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
+                  
+                  <div className="relative h-full bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col overflow-hidden transition-all duration-300 group-hover:bg-white/[0.02] group-hover:border-white/20">
+                    {/* Subtle inner glow */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-blue-500/10 blur-[50px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div className="flex justify-between items-start mb-4 relative z-10">
+                      <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-shadow">
+                        <Award className="w-6 h-6" />
+                      </div>
+                      <div className="p-2 rounded-full bg-white/5 text-gray-400 group-hover:text-white group-hover:bg-blue-500/20 transition-all duration-300">
+                        <ExternalLink className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-blue-300 transition-colors relative z-10">
+                      {cred.course}
+                    </h3>
+                    
+                    <div className="mt-auto pt-4 flex items-center justify-between text-sm relative z-10">
+                      <span className="font-medium text-gray-300">{cred.company}</span>
+                      <span className="text-gray-500">{cred.date}</span>
+                    </div>
                   </div>
-                  <div className="p-2 rounded-full bg-white/5 text-gray-400 group-hover:text-white group-hover:bg-blue-500/20 transition-all duration-300">
-                    <ExternalLink className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-                  </div>
-                </div>
-                
-                <h3 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-blue-300 transition-colors">
-                  {cred.course}
-                </h3>
-                
-                <div className="mt-auto pt-4 flex items-center justify-between text-sm">
-                  <span className="font-medium text-gray-300">{cred.company}</span>
-                  <span className="text-gray-500">{cred.date}</span>
-                </div>
-              </div>
-            </motion.a>
+                </a>
+              </SpotlightCard>
           ))}
         </div>
       </div>

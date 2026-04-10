@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { BrainCircuit } from 'lucide-react';
+import { SpotlightCard } from './spotlight-card';
 
 const containerVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -35,7 +36,7 @@ export const AboutCard = () => {
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-50 transition-opacity duration-500" />
 
       {/* Main Container */}
-      <motion.div 
+      <SpotlightCard 
         whileHover={{ scale: 1.01 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
         className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12 p-8 md:p-12 bg-[#050505]/80 backdrop-blur-xl rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl"
@@ -97,7 +98,7 @@ export const AboutCard = () => {
             </motion.blockquote>
           </motion.div>
         </div>
-      </motion.div>
+      </SpotlightCard>
     </motion.div>
   );
 };

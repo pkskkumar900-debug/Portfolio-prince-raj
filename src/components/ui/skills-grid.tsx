@@ -9,24 +9,24 @@ import {
 import { FaAws } from 'react-icons/fa';
 
 const skillsData = [
-  { name: 'Python', icon: SiPython },
-  { name: 'PyTorch', icon: SiPytorch },
-  { name: 'TensorFlow', icon: SiTensorflow },
-  { name: 'React', icon: SiReact },
-  { name: 'Node.js', icon: SiNodedotjs },
-  { name: 'TypeScript', icon: SiTypescript },
-  { name: 'Tailwind CSS', icon: SiTailwindcss },
-  { name: 'Docker', icon: SiDocker },
-  { name: 'AWS', icon: FaAws },
-  { name: 'PostgreSQL', icon: SiPostgresql },
-  { name: 'MongoDB', icon: SiMongodb },
-  { name: 'Git', icon: SiGit },
-  { name: 'Next.js', icon: SiNextdotjs },
-  { name: 'C++', icon: SiCplusplus },
-  { name: 'Redis', icon: SiRedis },
-  { name: 'Linux', icon: SiLinux },
-  { name: 'Figma', icon: SiFigma },
-  { name: 'GraphQL', icon: SiGraphql },
+  { name: 'Python', icon: SiPython, color: '#3776AB' },
+  { name: 'PyTorch', icon: SiPytorch, color: '#EE4C2C' },
+  { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
+  { name: 'React', icon: SiReact, color: '#61DAFB' },
+  { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
+  { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+  { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+  { name: 'Docker', icon: SiDocker, color: '#2496ED' },
+  { name: 'AWS', icon: FaAws, color: '#FF9900' },
+  { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1' },
+  { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+  { name: 'Git', icon: SiGit, color: '#F05032' },
+  { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
+  { name: 'C++', icon: SiCplusplus, color: '#00599C' },
+  { name: 'Redis', icon: SiRedis, color: '#DC382D' },
+  { name: 'Linux', icon: SiLinux, color: '#FCC624' },
+  { name: 'Figma', icon: SiFigma, color: '#F24E1E' },
+  { name: 'GraphQL', icon: SiGraphql, color: '#E10098' },
 ];
 
 interface SkillCardProps {
@@ -72,8 +72,20 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="absolute z-50 pointer-events-none"
           >
-            <div className="px-4 py-1.5 rounded-lg bg-black/90 backdrop-blur-md border border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.6)] whitespace-nowrap">
-              <span className="text-cyan-300 font-bold text-sm tracking-wide drop-shadow-[0_0_8px_rgba(6,182,212,0.9)]">
+            <div 
+              className="px-4 py-1.5 rounded-lg bg-black/90 backdrop-blur-md border whitespace-nowrap"
+              style={{ 
+                borderColor: `${skill.color}80`, 
+                boxShadow: `0 0 15px ${skill.color}60` 
+              }}
+            >
+              <span 
+                className="font-bold text-sm tracking-wide"
+                style={{ 
+                  color: skill.color,
+                  textShadow: `0 0 8px ${skill.color}90`
+                }}
+              >
                 {skill.name}
               </span>
             </div>
@@ -82,7 +94,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
       </AnimatePresence>
 
       <motion.div
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="relative group cursor-pointer"
@@ -90,25 +102,29 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
       >
         {/* Pulse Ring */}
         <div 
-          className={`absolute inset-0 rounded-full bg-cyan-500/30 blur-xl transition-all duration-500 ease-out ${
-            isHovered ? 'scale-[1.8] opacity-100' : 'scale-100 opacity-0'
-          }`} 
+          className={`absolute inset-0 rounded-full blur-xl transition-all duration-500 ease-out ${
+            isHovered ? 'scale-[1.6] opacity-100 animate-pulse' : 'scale-100 opacity-0'
+          }`}
+          style={{ backgroundColor: `${skill.color}40` }}
         />
         
         {/* Card Container */}
         <div 
           className={`relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/[0.03] backdrop-blur-md border transition-all duration-300 z-10 ${
-            isHovered 
-              ? 'border-cyan-400/80 shadow-[0_0_25px_rgba(6,182,212,0.5)] bg-cyan-950/40' 
-              : 'border-white/10 shadow-none'
+            isHovered ? 'shadow-lg' : 'border-white/10 shadow-none'
           }`}
+          style={{
+            borderColor: isHovered ? `${skill.color}80` : 'rgba(255,255,255,0.1)',
+            boxShadow: isHovered ? `0 0 25px ${skill.color}50` : 'none',
+            backgroundColor: isHovered ? `${skill.color}15` : 'rgba(255,255,255,0.03)'
+          }}
         >
           <skill.icon 
-            className={`w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 ${
-              isHovered 
-                ? 'text-cyan-300 drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]' 
-                : 'text-gray-400'
-            }`} 
+            className="w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300"
+            style={{ 
+              color: skill.color,
+              filter: isHovered ? `drop-shadow(0 0 12px ${skill.color}90)` : 'grayscale(30%) brightness(0.8)'
+            }}
           />
         </div>
       </motion.div>

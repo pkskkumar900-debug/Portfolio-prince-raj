@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Globe, MessageCircle, Zap, Github, Linkedin, Instagram } from 'lucide-react';
+import { SpotlightCard } from './spotlight-card';
 
 const itemVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -41,7 +42,7 @@ const ContactRow = ({ icon: Icon, label, value, href }: { icon: any, label: stri
 };
 
 const ContactCard = () => (
-  <motion.div variants={itemVariants} className="relative group">
+  <SpotlightCard variants={itemVariants} className="relative group rounded-[2rem]">
     {/* Outer Glow */}
     <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
     
@@ -75,11 +76,11 @@ const ContactCard = () => (
         <ContactRow icon={Globe} label="Website" value="Coming Soon" />
       </div>
     </div>
-  </motion.div>
+  </SpotlightCard>
 );
 
 const WhatsAppCard = () => (
-  <motion.div variants={itemVariants} className="relative group">
+  <SpotlightCard variants={itemVariants} className="relative group rounded-[2rem]" spotlightColor="rgba(34, 197, 94, 0.2)">
     {/* Outer Glow */}
     <div className="absolute -inset-1 bg-gradient-to-r from-green-600 to-emerald-400 rounded-[2rem] blur-xl opacity-10 group-hover:opacity-30 transition-opacity duration-500" />
     
@@ -137,7 +138,7 @@ const WhatsAppCard = () => (
         </motion.a>
       </div>
     </div>
-  </motion.div>
+  </SpotlightCard>
 );
 
 const SocialIcon = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => (
