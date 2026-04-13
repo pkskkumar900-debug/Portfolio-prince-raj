@@ -4,6 +4,8 @@
  */
 
 import React from 'react';
+import { ThemeProvider } from './components/ThemeProvider';
+import { Navbar } from './components/Navbar';
 import { NeuralVortexBackground } from './components/ui/NeuralVortexBackground';
 import { CursorGlow } from './components/ui/CursorGlow';
 import { HeroSection } from './components/HeroSection';
@@ -14,18 +16,22 @@ import { ContactFooter } from './components/ui/contact-footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-blue-500/30 font-sans overflow-x-hidden">
-      <CursorGlow />
-      <NeuralVortexBackground />
-      
-      <main className="relative z-10">
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <CredentialsSection />
-      </main>
-      
-      <ContactFooter />
-    </div>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="min-h-screen bg-background text-foreground selection:bg-blue-500/30 font-sans overflow-x-hidden transition-colors duration-300">
+        <CursorGlow />
+        <NeuralVortexBackground />
+        
+        <Navbar />
+        
+        <main className="relative z-10 pt-16">
+          <HeroSection />
+          <AboutSection />
+          <SkillsSection />
+          <CredentialsSection />
+        </main>
+        
+        <ContactFooter />
+      </div>
+    </ThemeProvider>
   );
 }

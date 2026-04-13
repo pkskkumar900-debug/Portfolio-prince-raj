@@ -58,7 +58,7 @@ export const CredentialsSection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4"
+            className="text-3xl md:text-5xl font-bold dark:text-white text-slate-900 tracking-tight mb-4"
           >
             Academic <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Credentials</span>
           </motion.h2>
@@ -91,26 +91,26 @@ export const CredentialsSection: React.FC = () => {
                   {/* Liquid hover effect background */}
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-2xl blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
                   
-                  <div className="relative h-full bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col overflow-hidden transition-all duration-300 group-hover:bg-white/[0.02] group-hover:border-white/20">
+                  <div className="relative h-full dark:bg-black/60 bg-white/60 backdrop-blur-xl border dark:border-white/10 border-black/10 rounded-2xl p-6 flex flex-col overflow-hidden transition-all duration-300 dark:group-hover:bg-white/[0.02] group-hover:bg-black/[0.02] dark:group-hover:border-white/20 group-hover:border-black/20">
                     {/* Subtle inner glow */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-blue-500/10 blur-[50px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
                     <div className="flex justify-between items-start mb-4 relative z-10">
-                      <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-shadow">
+                      <div className="p-3 rounded-xl bg-blue-500/10 text-blue-500 dark:text-blue-400 border border-blue-500/20 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-shadow">
                         <Award className="w-6 h-6" />
                       </div>
-                      <div className="p-2 rounded-full bg-white/5 text-gray-400 group-hover:text-white group-hover:bg-blue-500/20 transition-all duration-300">
+                      <div className="p-2 rounded-full dark:bg-white/5 bg-black/5 dark:text-gray-400 text-slate-500 group-hover:text-white group-hover:bg-blue-500/20 transition-all duration-300">
                         <ExternalLink className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                       </div>
                     </div>
                     
-                    <h3 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-blue-300 transition-colors relative z-10">
+                    <h3 className="text-xl font-bold dark:text-white text-slate-800 mb-2 leading-tight group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors relative z-10">
                       {cred.course}
                     </h3>
                     
                     <div className="mt-auto pt-4 flex items-center justify-between text-sm relative z-10">
-                      <span className="font-medium text-gray-300">{cred.company}</span>
-                      <span className="text-gray-500">{cred.date}</span>
+                      <span className="font-medium dark:text-gray-300 text-slate-600">{cred.company}</span>
+                      <span className="dark:text-gray-500 text-slate-400">{cred.date}</span>
                     </div>
                   </div>
                 </a>

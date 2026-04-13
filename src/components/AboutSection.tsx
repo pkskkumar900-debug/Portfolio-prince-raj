@@ -41,7 +41,7 @@ const Particles = () => {
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="relative py-24 z-10 bg-[#050505] overflow-hidden">
+    <section id="about" className="relative py-24 z-10 dark:bg-[#050505] bg-slate-50 overflow-hidden transition-colors duration-300">
       {/* Subtle radial gradient background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05)_0%,transparent_70%)] pointer-events-none" />
       

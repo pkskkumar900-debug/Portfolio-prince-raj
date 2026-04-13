@@ -157,8 +157,7 @@ export const NeuralVortexBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none opacity-90"
-      style={{ background: 'black' }}
+      className="fixed inset-0 z-0 pointer-events-none opacity-90 dark:bg-black bg-slate-50"
     />
   );
 };

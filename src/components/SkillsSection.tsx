@@ -11,7 +11,7 @@ export const SkillsSection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4"
+            className="text-3xl md:text-5xl font-bold dark:text-white text-slate-900 tracking-tight mb-4"
           >
             Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Stack</span>
           </motion.h2>

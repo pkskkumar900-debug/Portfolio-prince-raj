@@ -11,17 +11,17 @@ const itemVariants = {
 const ContactRow = ({ icon: Icon, label, value, href }: { icon: any, label: string, value: string, href?: string }) => {
   const content = (
     <>
-      <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] group-hover:bg-cyan-500/20 transition-all duration-300">
+      <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] group-hover:bg-cyan-500/20 transition-all duration-300">
         <Icon className="w-5 h-5" />
       </div>
       <div>
-        <p className="text-sm text-gray-400 font-medium">{label}</p>
-        <p className="text-lg font-semibold text-gray-200 group-hover:text-cyan-300 transition-colors">{value}</p>
+        <p className="text-sm dark:text-gray-400 text-slate-500 font-medium">{label}</p>
+        <p className="text-lg font-semibold dark:text-gray-200 text-slate-800 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors">{value}</p>
       </div>
     </>
   );
   
-  const className = "group flex items-center gap-4 p-3 -ml-3 rounded-2xl hover:bg-white/[0.04] transition-all duration-300 cursor-pointer";
+  const className = "group flex items-center gap-4 p-3 -ml-3 rounded-2xl hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-all duration-300 cursor-pointer";
   
   return href ? (
     <motion.a 
@@ -47,23 +47,23 @@ const ContactCard = () => (
     <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
     
     {/* Main Container */}
-    <div className="relative flex flex-col md:flex-row items-center p-8 md:p-12 bg-[#050505]/80 backdrop-blur-xl rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl">
+    <div className="relative flex flex-col md:flex-row items-center p-8 md:p-12 dark:bg-[#050505]/80 bg-white/80 backdrop-blur-xl rounded-[2rem] border dark:border-white/10 border-black/10 overflow-hidden shadow-2xl">
       
       {/* Abstract Neon Shape */}
       <div className="absolute right-0 top-0 w-full md:w-1/2 h-full pointer-events-none overflow-hidden flex items-center justify-end opacity-20 group-hover:opacity-40 transition-opacity duration-700">
         <div className="absolute right-10 w-64 h-64 bg-cyan-500/30 rounded-full blur-[80px]"></div>
-        <Zap className="w-80 h-80 text-cyan-400 drop-shadow-[0_0_30px_rgba(34,211,238,0.8)] transform rotate-12 translate-x-12 opacity-50" strokeWidth={1} />
+        <Zap className="w-80 h-80 text-cyan-500 dark:text-cyan-400 drop-shadow-[0_0_30px_rgba(34,211,238,0.8)] transform rotate-12 translate-x-12 opacity-50" strokeWidth={1} />
       </div>
 
       {/* Left Content */}
       <div className="w-full md:w-1/2 space-y-6 relative z-10">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black dark:text-white text-slate-900 tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
           LET'S <br/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">
             TOUCH
           </span>
         </h2>
-        <p className="text-gray-400 text-lg max-w-md leading-relaxed">
+        <p className="dark:text-gray-400 text-slate-600 text-lg max-w-md leading-relaxed">
           Have a project in mind or want to discuss AI solutions? Drop me a message.
         </p>
       </div>
@@ -85,7 +85,7 @@ const WhatsAppCard = () => (
     <div className="absolute -inset-1 bg-gradient-to-r from-green-600 to-emerald-400 rounded-[2rem] blur-xl opacity-10 group-hover:opacity-30 transition-opacity duration-500" />
     
     {/* Main Container */}
-    <div className="relative flex flex-col items-center text-center p-8 md:p-12 bg-[#050505]/80 backdrop-blur-xl rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl">
+    <div className="relative flex flex-col items-center text-center p-8 md:p-12 dark:bg-[#050505]/80 bg-white/80 backdrop-blur-xl rounded-[2rem] border dark:border-white/10 border-black/10 overflow-hidden shadow-2xl">
       
       <motion.div 
         animate={{ y: [-5, 5, -5] }} 
@@ -93,15 +93,15 @@ const WhatsAppCard = () => (
         className="relative"
       >
         <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full" />
-        <div className="relative p-5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 shadow-[0_0_20px_rgba(34,197,94,0.2)] mb-6">
+        <div className="relative p-5 rounded-full bg-green-500/10 border border-green-500/30 text-green-500 dark:text-green-400 shadow-[0_0_20px_rgba(34,197,94,0.2)] mb-6">
           <MessageCircle className="w-10 h-10 drop-shadow-[0_0_10px_rgba(34,197,94,0.8)]" />
         </div>
       </motion.div>
 
-      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-wide">
+      <h3 className="text-2xl md:text-3xl font-bold dark:text-white text-slate-900 mb-3 tracking-wide">
         Fastest Response
       </h3>
-      <p className="text-gray-400 max-w-md mb-8 text-lg">
+      <p className="dark:text-gray-400 text-slate-600 max-w-md mb-8 text-lg">
         For urgent inquiries or quick discussions, reach out directly on WhatsApp.
       </p>
       
@@ -131,8 +131,8 @@ const WhatsAppCard = () => (
             }}
           />
           
-          <MessageCircle className="w-6 h-6 relative z-10 text-green-300 drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
-          <span className="relative z-10 text-green-300 font-bold tracking-wide drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
+          <MessageCircle className="w-6 h-6 relative z-10 text-green-500 dark:text-green-300 drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
+          <span className="relative z-10 text-green-600 dark:text-green-300 font-bold tracking-wide drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
             CHAT DIRECTLY ON WhatsApp
           </span>
         </motion.a>
@@ -141,23 +141,39 @@ const WhatsAppCard = () => (
   </SpotlightCard>
 );
 
-const SocialIcon = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => (
+const SocialIcon = ({ href, icon: Icon, label, index }: { href: string, icon: any, label: string, index: number }) => (
   <motion.a
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    whileHover={{ scale: 1.1, y: -2 }}
+    initial={{ opacity: 0, scale: 0.5 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+    whileHover={{ scale: 1.05, y: -2 }}
     whileTap={{ scale: 0.95 }}
-    className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-500/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all duration-300 group"
+    className="flex flex-col items-center gap-2 group"
     aria-label={label}
   >
-    <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+    <div className="p-3 rounded-full dark:bg-white/5 bg-black/5 border dark:border-white/10 border-black/10 dark:text-gray-400 text-slate-600 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all duration-300">
+      <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+    </div>
+    <span className="text-xs font-medium dark:text-gray-500 text-slate-500 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors">
+      {label}
+    </span>
   </motion.a>
 );
 
 export const ContactFooter = () => {
   return (
-    <section id="contact" className="relative pt-24 pb-12 bg-[#050505] overflow-hidden z-10">
+    <motion.section 
+      id="contact" 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.8 }}
+      className="relative pt-24 pb-12 dark:bg-[#050505] bg-slate-50 overflow-hidden z-10 transition-colors duration-300"
+    >
       {/* Subtle radial gradient background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(6,182,212,0.05)_0%,transparent_70%)] pointer-events-none" />
       
@@ -176,22 +192,22 @@ export const ContactFooter = () => {
       </motion.div>
       
       {/* Copyright / Small Footer Bottom */}
-      <div className="mt-24 border-t border-white/10 pt-8 relative z-10">
-        <div className="container px-4 md:px-6 mx-auto max-w-5xl flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-4">
-            <SocialIcon href="mailto:developer@imprince.me" icon={Mail} label="Email" />
-            <SocialIcon href="https://github.com/pkskkumar900-debug" icon={Github} label="GitHub" />
-            <SocialIcon href="https://www.linkedin.com/in/prince-raj-ba4b973b3?utm_source=share_via&utm_content=profile&utm_medium=member_android" icon={Linkedin} label="LinkedIn" />
-            <SocialIcon href="https://instagram.com/princerjjjjj" icon={Instagram} label="Instagram" />
+      <div className="mt-24 border-t dark:border-white/10 border-black/10 pt-8 relative z-10">
+        <div className="container px-4 md:px-6 mx-auto max-w-5xl flex flex-col md:flex-row justify-between items-center gap-8 md:gap-6">
+          <div className="flex items-center gap-6 md:gap-4">
+            <SocialIcon href="mailto:developer@imprince.me" icon={Mail} label="Email" index={0} />
+            <SocialIcon href="https://github.com/pkskkumar900-debug" icon={Github} label="GitHub" index={1} />
+            <SocialIcon href="https://www.linkedin.com/in/prince-raj-ba4b973b3?utm_source=share_via&utm_content=profile&utm_medium=member_android" icon={Linkedin} label="LinkedIn" index={2} />
+            <SocialIcon href="https://instagram.com/princerjjjjj" icon={Instagram} label="Instagram" index={3} />
           </div>
-          <p className="text-gray-500 text-sm">
+          <p className="dark:text-gray-500 text-slate-500 text-sm text-center md:text-left">
             © {new Date().getFullYear()} Prince Raj. All rights reserved.
           </p>
-          <div className="text-gray-600 text-xs flex items-center gap-1">
+          <div className="dark:text-gray-600 text-slate-400 text-xs flex items-center gap-1">
             Designed with <span className="text-cyan-500 animate-pulse">❤</span> for the future
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };

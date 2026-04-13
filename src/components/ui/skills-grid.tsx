@@ -21,7 +21,7 @@ const skillsData = [
   { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1' },
   { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
   { name: 'Git', icon: SiGit, color: '#F05032' },
-  { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
+  { name: 'Next.js', icon: SiNextdotjs, color: '#888888' },
   { name: 'C++', icon: SiCplusplus, color: '#00599C' },
   { name: 'Redis', icon: SiRedis, color: '#DC382D' },
   { name: 'Linux', icon: SiLinux, color: '#FCC624' },
@@ -73,17 +73,18 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
             className="absolute z-50 pointer-events-none"
           >
             <div 
-              className="px-4 py-1.5 rounded-lg bg-black/90 backdrop-blur-md border whitespace-nowrap"
+              className="px-5 py-2 rounded-xl backdrop-blur-md border whitespace-nowrap transition-colors duration-300"
               style={{ 
-                borderColor: `${skill.color}80`, 
-                boxShadow: `0 0 15px ${skill.color}60` 
+                background: `linear-gradient(135deg, rgba(15,15,15,0.95) 0%, ${skill.color}30 100%)`,
+                borderColor: skill.color, 
+                boxShadow: `0 10px 25px -5px ${skill.color}80, inset 0 0 12px ${skill.color}40` 
               }}
             >
               <span 
-                className="font-bold text-sm tracking-wide"
+                className="font-bold text-base tracking-wide"
                 style={{ 
-                  color: skill.color,
-                  textShadow: `0 0 8px ${skill.color}90`
+                  color: '#ffffff',
+                  textShadow: `0 0 10px ${skill.color}, 0 0 20px ${skill.color}`
                 }}
               >
                 {skill.name}
@@ -94,7 +95,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
       </AnimatePresence>
 
       <motion.div
-        whileHover={{ scale: 1.08 }}
+        whileHover={{ scale: 1.08, y: -5 }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="relative group cursor-pointer"
@@ -110,19 +111,20 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
         
         {/* Card Container */}
         <div 
-          className={`relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/[0.03] backdrop-blur-md border transition-all duration-300 z-10 ${
-            isHovered ? 'shadow-lg' : 'border-white/10 shadow-none'
+          className={`relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full dark:bg-white/[0.03] bg-black/[0.03] backdrop-blur-md border transition-all duration-300 z-10 ${
+            isHovered ? 'shadow-lg' : 'dark:border-white/10 border-black/10 shadow-none'
           }`}
           style={{
-            borderColor: isHovered ? `${skill.color}80` : 'rgba(255,255,255,0.1)',
+            borderColor: isHovered ? `${skill.color}80` : undefined,
             boxShadow: isHovered ? `0 0 25px ${skill.color}50` : 'none',
-            backgroundColor: isHovered ? `${skill.color}15` : 'rgba(255,255,255,0.03)'
+            backgroundColor: isHovered ? `${skill.color}15` : undefined
           }}
         >
           <skill.icon 
             className="w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300"
             style={{ 
               color: skill.color,
+              transform: isHovered ? 'scale(1.15)' : 'scale(1)',
               filter: isHovered ? `drop-shadow(0 0 12px ${skill.color}90)` : 'grayscale(30%) brightness(0.8)'
             }}
           />
