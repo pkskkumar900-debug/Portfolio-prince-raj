@@ -1,102 +1,180 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { BrainCircuit } from 'lucide-react';
+import { BrainCircuit, Bot, TrendingUp, Layers, Sparkles, GraduationCap } from 'lucide-react';
 import { SpotlightCard } from './spotlight-card';
+import { staggerContainer, itemFadeUp, itemPop } from '../../lib/animations';
 
-const containerVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-      when: "beforeChildren",
-      staggerChildren: 0.2
+export const AboutCard: React.FC = () => {
+  const pillars = [
+    {
+      icon: Bot,
+      title: "Agentic AI Systems",
+      desc: "Architecting autonomous agents and smart automation workflows.",
+      color: "from-cyan-500/20 to-blue-500/10",
+      iconColor: "text-cyan-400"
+    },
+    {
+      icon: TrendingUp,
+      title: "Quantitative Trading",
+      desc: "Developing algorithmic market systems and statistical models.",
+      color: "from-emerald-500/20 to-teal-500/10",
+      iconColor: "text-emerald-400"
+    },
+    {
+      icon: Layers,
+      title: "Scalable Infrastructure",
+      desc: "Engineering high-throughput data pipelines and modern stacks.",
+      color: "from-purple-500/20 to-indigo-500/10",
+      iconColor: "text-purple-400"
     }
-  }
-};
+  ];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
-};
-
-export const AboutCard = () => {
   return (
     <motion.div
-      variants={containerVariants}
+      variants={staggerContainer}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      whileHover="hover"
-      className="relative group max-w-5xl mx-auto w-full"
+      viewport={{ once: true, margin: "-80px" }}
+      className="relative max-w-5xl mx-auto w-full"
     >
-      {/* Outer Glow */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-50 transition-opacity duration-500" />
+      {/* Dynamic Aura Glow */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 rounded-[2.5rem] blur-2xl opacity-15 hover:opacity-30 transition-opacity duration-700 pointer-events-none" />
 
-      {/* Main Container */}
-      <SpotlightCard 
-        whileHover={{ scale: 1.01 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12 p-8 md:p-12 dark:bg-[#050505]/80 bg-white/80 backdrop-blur-xl rounded-[2rem] border dark:border-white/10 border-black/10 overflow-hidden shadow-2xl"
-      >
-        
-        {/* Glass Shine Effect */}
-        <motion.div
-          variants={{
-            hover: { x: ["-100%", "200%"], transition: { duration: 1.5, ease: "easeInOut" } }
-          }}
-          className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent dark:via-white/10 via-black/5 to-transparent skew-x-12 pointer-events-none"
-        />
-
-        {/* Left: Icon */}
-        <motion.div 
-          variants={itemVariants}
-          className="flex-shrink-0 relative"
-        >
-          <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full" />
-          <motion.div
-            animate={{ y: [-8, 8, -8] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="relative p-6 dark:bg-white/[0.02] bg-black/[0.02] border dark:border-white/10 border-black/10 rounded-full shadow-[0_0_30px_rgba(6,182,212,0.15)]"
+      {/* Main 3D Spotlight Container */}
+      <SpotlightCard className="relative p-6 sm:p-10 md:p-12 overflow-hidden rounded-[2.5rem]">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 md:gap-12 relative z-10">
+          
+          {/* Left: 3D Holographic AI Neural Core */}
+          <motion.div 
+            variants={itemPop}
+            className="flex-shrink-0 relative flex flex-col items-center justify-center"
           >
-            <BrainCircuit className="w-20 h-20 md:w-28 md:h-28 text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.8)]" aria-label="AI Brain Icon" />
+            <div className="relative w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center">
+              {/* Outer Rotating Gyro Ring */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 rounded-full border border-dashed border-cyan-500/30 dark:border-cyan-400/40"
+              />
+              
+              {/* Counter-rotating Middle Ring */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-3 rounded-full border border-blue-500/30 dark:border-blue-400/30 border-t-cyan-400 border-r-transparent"
+              />
+
+              {/* Glowing Ambient Core */}
+              <div className="absolute inset-6 bg-gradient-to-tr from-cyan-500/20 via-blue-500/30 to-purple-500/20 rounded-full blur-xl animate-pulse" />
+
+              {/* Center 3D Glass Node */}
+              <motion.div
+                animate={{ y: [-6, 6, -6] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 p-7 rounded-3xl bg-white/70 dark:bg-slate-900/80 backdrop-blur-2xl border border-white/60 dark:border-white/20 shadow-[0_10px_30px_rgba(6,182,212,0.3)] flex items-center justify-center"
+              >
+                <BrainCircuit className="w-16 h-16 text-cyan-500 dark:text-cyan-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
+              </motion.div>
+
+              {/* Floating Mini Tech Badges */}
+              <motion.div 
+                animate={{ y: [-4, 4, -4], x: [2, -2, 2] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-1 -right-1 px-2.5 py-1 bg-cyan-500/10 border border-cyan-500/30 backdrop-blur-md rounded-full text-[10px] font-bold text-cyan-600 dark:text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.3)]"
+              >
+                AI CORE
+              </motion.div>
+
+              <motion.div 
+                animate={{ y: [4, -4, 4], x: [-2, 2, -2] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -bottom-1 -left-1 px-2.5 py-1 bg-purple-500/10 border border-purple-500/30 backdrop-blur-md rounded-full text-[10px] font-bold text-purple-600 dark:text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.3)]"
+              >
+                QUANT
+              </motion.div>
+            </div>
+            
+            {/* Status Subtitle */}
+            <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+              Autonomous Agent Engine
+            </div>
           </motion.div>
-        </motion.div>
 
-        {/* Right: Text Content */}
-        <div className="flex-1 space-y-6 text-center md:text-left">
-          <motion.h2 
-            variants={itemVariants}
-            className="text-3xl md:text-4xl font-bold dark:text-white text-slate-900 tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
-          >
-            About Me
-          </motion.h2>
+          {/* Right: Rich Narrative & Pillars */}
+          <div className="flex-1 space-y-6 text-left">
+            <div>
+              <motion.div variants={itemPop} className="flex items-center gap-2 mb-2">
+                <Sparkles className="w-4 h-4 text-cyan-400" />
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                  Engineering Overview
+                </span>
+              </motion.div>
+              <motion.h2 
+                variants={itemFadeUp}
+                className="text-3xl md:text-4xl font-extrabold dark:text-white text-slate-900 tracking-tight"
+              >
+                About <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Me</span>
+              </motion.h2>
+            </div>
 
-          <motion.p 
-            variants={itemVariants}
-            className="dark:text-gray-300 text-slate-600 text-lg md:text-xl leading-relaxed"
-          >
-            As an AI Developer, I build agentic automation tools, intelligent personal assistants, and data-driven systems.
-          </motion.p>
-
-          <motion.p 
-            variants={itemVariants}
-            className="dark:text-gray-300 text-slate-600 text-lg md:text-xl leading-relaxed"
-          >
-            Currently advancing my expertise through a <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]">BS in CSDA from IIT Patna</span>, acquiring deep technical expertise in data-driven decision making, complex algorithm design, and scalable AI infrastructure.
-          </motion.p>
-
-          <motion.div variants={itemVariants} className="pt-2">
-            <motion.blockquote 
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="relative italic text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 drop-shadow-[0_0_12px_rgba(250,204,21,0.5)] text-xl md:text-2xl font-medium border-l-4 border-yellow-500/50 pl-6 py-2"
+            <motion.p 
+              variants={itemFadeUp}
+              className="dark:text-slate-300 text-slate-700 text-base md:text-lg leading-relaxed font-normal"
             >
-              "Merging technology and finance into a self-sustaining intelligent ecosystem."
-            </motion.blockquote>
-          </motion.div>
+              As an AI Developer, I engineer autonomous agentic systems, bespoke machine learning models, and quantitative trading frameworks engineered for low-latency decision intelligence.
+            </motion.p>
+
+            {/* IIT Patna Academic Highlight Pill */}
+            <motion.div 
+              variants={itemFadeUp}
+              whileHover={{ scale: 1.02, x: 4 }}
+              className="relative overflow-hidden p-4.5 rounded-[1.75rem] bg-gradient-to-r from-blue-600/10 via-cyan-500/10 to-indigo-600/5 border border-cyan-500/30 dark:border-cyan-400/20 backdrop-blur-xl flex items-center gap-4 shadow-[0_4px_20px_rgba(6,182,212,0.15)] group/acad transition-all duration-300"
+            >
+              <div className="absolute inset-x-4 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent pointer-events-none" />
+              <div className="p-3 rounded-2xl bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 group-hover/acad:scale-110 group-hover/acad:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all duration-300">
+                <GraduationCap className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase text-cyan-600 dark:text-cyan-400 tracking-wider">
+                  Academic Pursuit
+                </p>
+                <p className="text-sm md:text-base font-extrabold text-slate-900 dark:text-white">
+                  BS in Computer Science & Data Analytics — IIT Patna
+                </p>
+              </div>
+            </motion.div>
+
+            {/* 3 Core Interactive Liquid Pillars */}
+            <motion.div variants={itemFadeUp} className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
+              {pillars.map((pillar) => (
+                <motion.div
+                  key={pillar.title}
+                  whileHover={{ y: -5, scale: 1.03 }}
+                  className="relative p-4 rounded-[1.5rem] bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl border border-white/60 dark:border-white/10 hover:border-cyan-400/40 shadow-[0_4px_15px_rgba(0,0,0,0.03)] dark:shadow-[0_8px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_25px_rgba(6,182,212,0.25)] transition-all duration-300 group/pillar text-left overflow-hidden"
+                >
+                  <div className="absolute inset-x-3 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent pointer-events-none" />
+                  <div className={`p-2.5 w-fit rounded-2xl bg-gradient-to-br ${pillar.color} mb-3 border border-white/20 group-hover/pillar:scale-110 group-hover/pillar:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-300`}>
+                    <pillar.icon className={`w-4 h-4 ${pillar.iconColor}`} />
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1 tracking-tight">
+                    {pillar.title}
+                  </h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
+                    {pillar.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Liquid Golden Quote */}
+            <motion.div variants={itemFadeUp} className="pt-2">
+              <div className="relative overflow-hidden italic text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-300 drop-shadow-[0_0_15px_rgba(251,191,36,0.4)] text-base md:text-lg font-semibold border-l-4 border-amber-400/80 pl-4 py-2.5 rounded-r-2xl bg-amber-500/[0.04] backdrop-blur-md">
+                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-amber-400/40 via-yellow-300/60 to-transparent pointer-events-none" />
+                "Merging technology and finance into a self-sustaining intelligent ecosystem."
+              </div>
+            </motion.div>
+          </div>
         </div>
       </SpotlightCard>
     </motion.div>

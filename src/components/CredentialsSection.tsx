@@ -1,51 +1,75 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ExternalLink, Award } from 'lucide-react';
+import { ExternalLink, Award, Sparkles, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { EducationCard } from './ui/education-card';
 import { SpotlightCard } from './ui/spotlight-card';
+import { staggerContainer, staggerGrid, itemFadeUp, itemPop } from '../lib/animations';
 
-const credentials = [
+interface Credential {
+  course: string;
+  company: string;
+  date: string;
+  url: string;
+  badgeColor: string;
+  accentGradient: string;
+}
+
+const credentials: Credential[] = [
   {
     course: "Connect and Protect: Networks and Network Security",
     company: "Google",
     date: "Jan 16, 2026",
-    url: "https://coursera.org/verify/4OYZNCAMLVNB"
+    url: "https://coursera.org/verify/4OYZNCAMLVNB",
+    badgeColor: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+    accentGradient: "from-blue-500 to-cyan-400"
   },
   {
     course: "Machine Learning with Python",
     company: "IBM",
     date: "Dec 20, 2025",
-    url: "https://coursera.org/verify/XMWSP1OIM1R2"
+    url: "https://coursera.org/verify/XMWSP1OIM1R2",
+    badgeColor: "text-indigo-500 bg-indigo-500/10 border-indigo-500/20",
+    accentGradient: "from-indigo-500 to-blue-500"
   },
   {
     course: "Develop Generative AI Applications: Get Started",
     company: "IBM",
     date: "Dec 12, 2025",
-    url: "https://coursera.org/verify/YMFCRD9D750W"
+    url: "https://coursera.org/verify/YMFCRD9D750W",
+    badgeColor: "text-indigo-500 bg-indigo-500/10 border-indigo-500/20",
+    accentGradient: "from-indigo-500 to-purple-500"
   },
   {
     course: "AWS Artificial Intelligence Practitioner",
     company: "AWS",
     date: "Dec 11, 2025",
-    url: "https://coursera.org/verify/HG4W9BZK9BLI"
+    url: "https://coursera.org/verify/HG4W9BZK9BLI",
+    badgeColor: "text-amber-500 bg-amber-500/10 border-amber-500/20",
+    accentGradient: "from-amber-500 to-orange-500"
   },
   {
     course: "Introduction to Large Language Models",
     company: "Google Cloud",
     date: "Dec 2, 2025",
-    url: "https://coursera.org/verify/0LBYP4FDCQT4"
+    url: "https://coursera.org/verify/0LBYP4FDCQT4",
+    badgeColor: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+    accentGradient: "from-blue-500 to-teal-400"
   },
   {
     course: "Python for Data Science, AI & Development",
     company: "IBM",
     date: "Nov 17, 2025",
-    url: "https://coursera.org/verify/TE0ACYVR0G0G"
+    url: "https://coursera.org/verify/TE0ACYVR0G0G",
+    badgeColor: "text-indigo-500 bg-indigo-500/10 border-indigo-500/20",
+    accentGradient: "from-indigo-500 to-cyan-400"
   },
   {
     course: "Introduction to Generative AI",
     company: "Google Cloud",
     date: "Oct 25, 2025",
-    url: "https://coursera.org/verify/WYBIO9D7RH8Z"
+    url: "https://coursera.org/verify/WYBIO9D7RH8Z",
+    badgeColor: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+    accentGradient: "from-blue-500 to-purple-400"
   }
 ];
 
@@ -53,70 +77,134 @@ export const CredentialsSection: React.FC = () => {
   return (
     <section id="credentials" className="relative py-24 z-10">
       <div className="container px-4 md:px-6 mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold dark:text-white text-slate-900 tracking-tight mb-4"
-          >
-            Academic <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Credentials</span>
-          </motion.h2>
+        
+        {/* Main Section Header with Staggered Entrance */}
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="text-center mb-16"
+        >
           <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="h-1 w-20 bg-blue-500 mx-auto rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-          ></motion.div>
-        </div>
+            variants={itemPop}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-bold text-blue-600 dark:text-blue-400 mb-4 shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+          >
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>ACADEMIC & PROFESSIONAL CREDENTIALS</span>
+          </motion.div>
 
-        <EducationCard />
+          <motion.h2 
+            variants={itemFadeUp}
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold dark:text-white text-slate-900 tracking-tight mb-4"
+          >
+            Academic & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500">Industry Credentials</span>
+          </motion.h2>
+          
+          <motion.p
+            variants={itemFadeUp}
+            className="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto"
+          >
+            Academic pursuit at IIT Patna alongside globally accredited professional certifications from Google, IBM, and AWS.
+          </motion.p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {credentials.map((cred, idx) => (
-              <SpotlightCard
-                key={idx}
-                className="group relative block h-full rounded-2xl"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-              >
-                <a
-                  href={cred.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block h-full"
+        {/* 1. Education Card with Staggered Slide In */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="mb-14"
+        >
+          <motion.div variants={itemFadeUp}>
+            <EducationCard />
+          </motion.div>
+        </motion.div>
+
+        {/* 2. Certifications Header & Grid */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-6"
+        >
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-black/5 dark:border-white/10">
+            <div>
+              <motion.h3 variants={itemFadeUp} className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
+                <Award className="w-6 h-6 text-cyan-500" />
+                Global Certifications Matrix
+              </motion.h3>
+              <motion.p variants={itemFadeUp} className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                Verified industry credentials awarded in AI, Cloud Architecture & Machine Learning.
+              </motion.p>
+            </div>
+            
+            <motion.div variants={itemPop} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-bold text-cyan-600 dark:text-cyan-400">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>7 Verified Credentials</span>
+            </motion.div>
+          </div>
+
+          {/* 7 Global Certifications Grid with Staggered Cascading */}
+          <motion.div 
+            variants={staggerGrid}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2"
+          >
+            {credentials.map((cred, idx) => (
+              <motion.div key={idx} variants={itemFadeUp} className="h-full">
+                <SpotlightCard
+                  className="group relative block h-full rounded-[2.2rem] overflow-hidden backdrop-blur-2xl bg-white/50 dark:bg-slate-950/60 border border-white/60 dark:border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_12px_35px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_40px_rgba(6,182,212,0.2)] transition-all duration-300"
+                  spotlightColor="rgba(6, 182, 212, 0.25)"
                 >
-                  {/* Liquid hover effect background */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-2xl blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
-                  
-                  <div className="relative h-full dark:bg-black/60 bg-white/60 backdrop-blur-xl border dark:border-white/10 border-black/10 rounded-2xl p-6 flex flex-col overflow-hidden transition-all duration-300 dark:group-hover:bg-white/[0.02] group-hover:bg-black/[0.02] dark:group-hover:border-white/20 group-hover:border-black/20">
-                    {/* Subtle inner glow */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-blue-500/10 blur-[50px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    <div className="flex justify-between items-start mb-4 relative z-10">
-                      <div className="p-3 rounded-xl bg-blue-500/10 text-blue-500 dark:text-blue-400 border border-blue-500/20 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-shadow">
-                        <Award className="w-6 h-6" />
+                  <a
+                    href={cred.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full p-6 sm:p-7 flex flex-col justify-between"
+                  >
+                    {/* Top Specular Edge Line */}
+                    <div className="absolute inset-x-5 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 dark:via-white/20 to-transparent pointer-events-none" />
+
+                    {/* Top Card Bar */}
+                    <div>
+                      <div className="flex justify-between items-start mb-4 relative z-10">
+                        <div className="flex items-center gap-2">
+                          <div className={`p-2.5 rounded-2xl border ${cred.badgeColor} flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all duration-300`}>
+                            <Award className="w-5 h-5" />
+                          </div>
+                          <span className={`px-3 py-1 text-xs font-extrabold rounded-xl border ${cred.badgeColor} tracking-wider`}>
+                            {cred.company}
+                          </span>
+                        </div>
+
+                        <div className="p-2.5 rounded-2xl bg-black/5 dark:bg-white/5 text-slate-400 group-hover:text-cyan-400 group-hover:bg-cyan-500/15 border border-black/5 dark:border-white/10 transition-all duration-300 group-hover:scale-110">
+                          <ExternalLink className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                        </div>
                       </div>
-                      <div className="p-2 rounded-full dark:bg-white/5 bg-black/5 dark:text-gray-400 text-slate-500 group-hover:text-white group-hover:bg-blue-500/20 transition-all duration-300">
-                        <ExternalLink className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-                      </div>
+                      
+                      {/* Course Title */}
+                      <h3 className="text-lg sm:text-xl font-extrabold dark:text-white text-slate-900 mb-3 leading-snug group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors relative z-10 tracking-tight">
+                        {cred.course}
+                      </h3>
                     </div>
                     
-                    <h3 className="text-xl font-bold dark:text-white text-slate-800 mb-2 leading-tight group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors relative z-10">
-                      {cred.course}
-                    </h3>
-                    
-                    <div className="mt-auto pt-4 flex items-center justify-between text-sm relative z-10">
-                      <span className="font-medium dark:text-gray-300 text-slate-600">{cred.company}</span>
-                      <span className="dark:text-gray-500 text-slate-400">{cred.date}</span>
+                    {/* Bottom Metadata & Liquid Verification Pill */}
+                    <div className="mt-4 pt-4 border-t border-black/5 dark:border-white/10 flex items-center justify-between text-xs relative z-10">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 font-bold shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span>Verified</span>
+                      </div>
+                      <span className="font-semibold text-slate-500 dark:text-slate-400">{cred.date}</span>
                     </div>
-                  </div>
-                </a>
-              </SpotlightCard>
-          ))}
-        </div>
+                  </a>
+                </SpotlightCard>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+
       </div>
     </section>
   );

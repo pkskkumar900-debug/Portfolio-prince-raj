@@ -1,139 +1,351 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Globe, MessageCircle, Zap, Github, Linkedin, Instagram } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { 
+  Mail, Phone, MapPin, Globe, MessageCircle, Zap, 
+  Github, Linkedin, Instagram, Sparkles, Send, Copy, Check, 
+  ArrowUpRight, Clock, ShieldCheck, CheckCircle2 
+} from 'lucide-react';
 import { SpotlightCard } from './spotlight-card';
+import { staggerContainer, itemFadeUp, itemPop } from '../../lib/animations';
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-};
+const ContactChannelRow = ({ 
+  icon: Icon, 
+  label, 
+  value, 
+  href,
+  canCopy = true,
+  onCopied
+}: { 
+  icon: any;
+  label: string; 
+  value: string; 
+  href?: string;
+  canCopy?: boolean;
+  onCopied?: (text: string) => void;
+}) => {
+  const [copied, setCopied] = useState(false);
 
-const ContactRow = ({ icon: Icon, label, value, href }: { icon: any, label: string, value: string, href?: string }) => {
-  const content = (
-    <>
-      <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] group-hover:bg-cyan-500/20 transition-all duration-300">
-        <Icon className="w-5 h-5" />
-      </div>
-      <div>
-        <p className="text-sm dark:text-gray-400 text-slate-500 font-medium">{label}</p>
-        <p className="text-lg font-semibold dark:text-gray-200 text-slate-800 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors">{value}</p>
-      </div>
-    </>
-  );
-  
-  const className = "group flex items-center gap-4 p-3 -ml-3 rounded-2xl hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-all duration-300 cursor-pointer";
-  
-  return href ? (
-    <motion.a 
-      href={href} 
-      target={href.startsWith('http') ? "_blank" : undefined} 
-      rel={href.startsWith('http') ? "noopener noreferrer" : undefined} 
-      whileHover={{ x: 10 }} 
-      className={className} 
-      aria-label={label}
+  const handleCopy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(value);
+    setCopied(true);
+    if (onCopied) onCopied(value);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <motion.div
+      whileHover={{ scale: 1.02, x: 4 }}
+      whileTap={{ scale: 0.98 }}
+      className="group relative flex items-center justify-between p-4 sm:p-4.5 rounded-[1.75rem] bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border border-white/70 dark:border-white/10 hover:border-cyan-400/50 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_8px_25px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_30px_rgba(6,182,212,0.25)] transition-all duration-300 overflow-hidden"
     >
-      {content}
-    </motion.a>
-  ) : (
-    <motion.div whileHover={{ x: 10 }} className={className} aria-label={label}>
-      {content}
+      {/* Top Liquid Specular Bevel Line */}
+      <div className="absolute inset-x-4 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/80 dark:via-cyan-400/40 to-transparent pointer-events-none" />
+
+      {/* Hover Liquid Fill Gradient Wave */}
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+      {/* Main Channel Content */}
+      <a 
+        href={href}
+        target={href?.startsWith('http') ? "_blank" : undefined}
+        rel={href?.startsWith('http') ? "noopener noreferrer" : undefined}
+        className="flex items-center gap-4 flex-1 min-w-0"
+      >
+        <div className="relative p-3 rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/25 group-hover:scale-110 group-hover:bg-cyan-500/20 group-hover:border-cyan-400/50 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all duration-300 shrink-0">
+          <Icon className="w-5 h-5" />
+          {/* Subtle pulsating dot */}
+          <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 animate-ping" />
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            {label}
+          </p>
+          <p className="text-sm sm:text-base font-extrabold dark:text-slate-100 text-slate-900 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors truncate tracking-tight">
+            {value}
+          </p>
+        </div>
+      </a>
+
+      {/* Copy / Link Indicator Action */}
+      <div className="flex items-center gap-2 ml-3 shrink-0">
+        {canCopy && (
+          <button
+            onClick={handleCopy}
+            className={`p-2 rounded-xl border text-xs font-bold transition-all duration-200 flex items-center gap-1 ${
+              copied
+                ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-600 dark:text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.4)]'
+                : 'bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/10 text-slate-400 hover:text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400/30'
+            }`}
+            title="Copy to clipboard"
+            aria-label={`Copy ${label}`}
+          >
+            {copied ? (
+              <>
+                <Check className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline text-[10px]">Copied</span>
+              </>
+            ) : (
+              <Copy className="w-3.5 h-3.5" />
+            )}
+          </button>
+        )}
+
+        {href && (
+          <a
+            href={href}
+            target={href.startsWith('http') ? "_blank" : undefined}
+            rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
+            className="p-2 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 text-slate-400 hover:text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400/30 transition-all duration-200"
+            aria-label={`Open ${label}`}
+          >
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        )}
+      </div>
     </motion.div>
   );
 };
 
-const ContactCard = () => (
-  <SpotlightCard variants={itemVariants} className="relative group rounded-[2rem]">
-    {/* Outer Glow */}
-    <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-    
-    {/* Main Container */}
-    <div className="relative flex flex-col md:flex-row items-center p-8 md:p-12 dark:bg-[#050505]/80 bg-white/80 backdrop-blur-xl rounded-[2rem] border dark:border-white/10 border-black/10 overflow-hidden shadow-2xl">
-      
-      {/* Abstract Neon Shape */}
-      <div className="absolute right-0 top-0 w-full md:w-1/2 h-full pointer-events-none overflow-hidden flex items-center justify-end opacity-20 group-hover:opacity-40 transition-opacity duration-700">
-        <div className="absolute right-10 w-64 h-64 bg-cyan-500/30 rounded-full blur-[80px]"></div>
-        <Zap className="w-80 h-80 text-cyan-500 dark:text-cyan-400 drop-shadow-[0_0_30px_rgba(34,211,238,0.8)] transform rotate-12 translate-x-12 opacity-50" strokeWidth={1} />
-      </div>
-
-      {/* Left Content */}
-      <div className="w-full md:w-1/2 space-y-6 relative z-10">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black dark:text-white text-slate-900 tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-          LET'S <br/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">
-            TOUCH
-          </span>
-        </h2>
-        <p className="dark:text-gray-400 text-slate-600 text-lg max-w-md leading-relaxed">
-          Have a project in mind or want to discuss AI solutions? Drop me a message.
-        </p>
-      </div>
-
-      {/* Right Content (Contact Items) */}
-      <div className="w-full md:w-1/2 mt-10 md:mt-0 flex flex-col gap-2 relative z-10 md:pl-10">
-        <ContactRow icon={Mail} label="Email" value="developer@imprince.me" href="mailto:developer@imprince.me" />
-        <ContactRow icon={Phone} label="Phone" value="+91 8252995548" href="tel:+918252995548" />
-        <ContactRow icon={MapPin} label="Location" value="India" />
-        <ContactRow icon={Globe} label="Website" value="Coming Soon" />
-      </div>
-    </div>
-  </SpotlightCard>
-);
-
-const WhatsAppCard = () => (
-  <SpotlightCard variants={itemVariants} className="relative group rounded-[2rem]" spotlightColor="rgba(34, 197, 94, 0.2)">
-    {/* Outer Glow */}
-    <div className="absolute -inset-1 bg-gradient-to-r from-green-600 to-emerald-400 rounded-[2rem] blur-xl opacity-10 group-hover:opacity-30 transition-opacity duration-500" />
-    
-    {/* Main Container */}
-    <div className="relative flex flex-col items-center text-center p-8 md:p-12 dark:bg-[#050505]/80 bg-white/80 backdrop-blur-xl rounded-[2rem] border dark:border-white/10 border-black/10 overflow-hidden shadow-2xl">
-      
+const LiquidLetsConnectCard = ({ onToast }: { onToast: (msg: string) => void }) => {
+  return (
+    <SpotlightCard 
+      className="relative group rounded-[2.75rem] overflow-hidden border border-white/60 dark:border-white/15 backdrop-blur-3xl bg-white/40 dark:bg-slate-950/50 shadow-[0_20px_60px_rgba(0,0,0,0.06)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.6)]" 
+      spotlightColor="rgba(6, 182, 212, 0.3)"
+    >
+      {/* Liquid Caustic Morphing Background Layer 1 */}
       <motion.div 
-        animate={{ y: [-5, 5, -5] }} 
+        animate={{
+          borderRadius: [
+            "60% 40% 30% 70% / 60% 30% 70% 40%",
+            "30% 60% 70% 40% / 50% 60% 30% 60%",
+            "60% 40% 30% 70% / 60% 30% 70% 40%"
+          ],
+          scale: [1, 1.12, 1],
+          rotate: [0, 180, 360],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-br from-cyan-500/25 via-blue-600/20 to-indigo-500/25 blur-3xl pointer-events-none opacity-60 group-hover:opacity-90 transition-opacity duration-700"
+      />
+
+      {/* Liquid Caustic Morphing Background Layer 2 */}
+      <motion.div 
+        animate={{
+          borderRadius: [
+            "40% 60% 60% 40% / 40% 40% 60% 60%",
+            "60% 40% 30% 70% / 70% 30% 50% 50%",
+            "40% 60% 60% 40% / 40% 40% 60% 60%"
+          ],
+          scale: [1, 1.15, 1],
+          rotate: [360, 180, 0],
+        }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-tr from-indigo-500/25 via-cyan-500/20 to-teal-400/20 blur-3xl pointer-events-none opacity-60 group-hover:opacity-90 transition-opacity duration-700"
+      />
+
+      {/* Continuous Liquid Light Shimmer Wave */}
+      <motion.div
+        className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 dark:via-cyan-400/10 to-transparent skew-x-12 pointer-events-none"
+        animate={{
+          translateX: ["-150%", "250%"],
+        }}
+        transition={{
+          duration: 3.5,
+          repeat: Infinity,
+          repeatDelay: 2,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* Top Specular Liquid Arc */}
+      <div className="absolute inset-x-8 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400/70 to-transparent pointer-events-none" />
+
+      <div className="relative z-10 flex flex-col lg:flex-row items-stretch justify-between p-8 sm:p-10 md:p-12 gap-10">
+        
+        {/* Left Interactive Column */}
+        <div className="w-full lg:w-1/2 flex flex-col justify-between space-y-6 text-left">
+          
+          <div className="space-y-5">
+            {/* Status Pill with Fluid Glow */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs font-extrabold text-cyan-600 dark:text-cyan-300 backdrop-blur-2xl shadow-[0_0_20px_rgba(6,182,212,0.25)]">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500 shadow-[0_0_8px_#06b6d4]"></span>
+              </span>
+              <span className="tracking-wider uppercase">ACCEPTING INITIATIVES & INQUIRIES</span>
+            </div>
+
+            {/* Liquid Heading */}
+            <div className="space-y-1">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black dark:text-white text-slate-900 tracking-tighter leading-none">
+                LET'S <br/>
+                <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 drop-shadow-[0_0_25px_rgba(6,182,212,0.6)]">
+                  CONNECT
+                </span>
+              </h2>
+            </div>
+            
+            <p className="dark:text-slate-300 text-slate-700 text-base md:text-lg max-w-md leading-relaxed font-normal">
+              Looking for quantitative trading algorithms, autonomous AI workflows, or high-performance full-stack architectures? Let's build what's next.
+            </p>
+          </div>
+
+          {/* Quick Action Liquid Buttons */}
+          <div className="space-y-3 pt-2">
+            <div className="flex flex-wrap items-center gap-3">
+              <motion.a
+                href="mailto:kusprince.raj@gmail.com?subject=Collaboration%20Inquiry%20via%20Portfolio"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                className="relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 bg-[length:200%_auto] hover:bg-right text-white font-extrabold text-sm shadow-[0_10px_30px_rgba(6,182,212,0.4)] hover:shadow-[0_15px_40px_rgba(6,182,212,0.65)] border border-white/30 transition-all duration-500 overflow-hidden"
+              >
+                {/* Internal Shimmer */}
+                <motion.div
+                  className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+                  animate={{ translateX: ["-100%", "200%"] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                />
+                <Send className="w-4 h-4 relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
+                <span className="relative z-10 tracking-wide">Send Direct Email</span>
+              </motion.a>
+
+              <motion.button
+                onClick={() => {
+                  navigator.clipboard.writeText("kusprince.raj@gmail.com");
+                  onToast("Email address copied to clipboard! ✨");
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center gap-2 px-5 py-4 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border border-white/60 dark:border-white/15 text-slate-800 dark:text-slate-200 hover:text-cyan-500 dark:hover:text-cyan-300 font-bold text-sm shadow-[0_6px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_25px_rgba(0,0,0,0.4)] hover:border-cyan-400/40 transition-all duration-300"
+              >
+                <Copy className="w-4 h-4 text-cyan-400" />
+                <span>Copy Email</span>
+              </motion.button>
+            </div>
+
+            {/* Availability Badges */}
+            <div className="flex items-center gap-4 text-xs font-semibold text-slate-500 dark:text-slate-400 pt-2">
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-cyan-400" />
+                IST / Global Remote
+              </span>
+              <span className="w-1 h-1 rounded-full bg-slate-400" />
+              <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                Direct Communication
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Interactive Channels Column */}
+        <div className="w-full lg:w-1/2 flex flex-col justify-center gap-3">
+          <ContactChannelRow 
+            icon={Mail} 
+            label="Primary Contact" 
+            value="kusprince.raj@gmail.com" 
+            href="mailto:kusprince.raj@gmail.com"
+            onCopied={() => onToast("Primary email copied! ✨")}
+          />
+          <ContactChannelRow 
+            icon={Mail} 
+            label="Domain Address" 
+            value="developer@imprince.me" 
+            href="mailto:developer@imprince.me"
+            onCopied={() => onToast("Domain email copied! ✨")}
+          />
+          <ContactChannelRow 
+            icon={Phone} 
+            label="Phone / Call" 
+            value="+91 8252995548" 
+            href="tel:+918252995548"
+            onCopied={() => onToast("Phone number copied! ✨")}
+          />
+          <ContactChannelRow 
+            icon={MapPin} 
+            label="Base Location" 
+            value="Patna & Across India" 
+            canCopy={false}
+          />
+          <ContactChannelRow 
+            icon={Globe} 
+            label="Brand Identity" 
+            value="ImPrince Tectra" 
+            href="https://github.com/pkskkumar900-debug"
+            canCopy={false}
+          />
+        </div>
+      </div>
+    </SpotlightCard>
+  );
+};
+
+const LiquidWhatsAppCard = () => (
+  <SpotlightCard 
+    className="relative group rounded-[2.75rem] overflow-hidden border border-emerald-500/20 dark:border-emerald-500/20 backdrop-blur-3xl bg-white/40 dark:bg-slate-950/50 shadow-[0_20px_50px_rgba(16,185,129,0.06)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.6)]" 
+    spotlightColor="rgba(34, 197, 94, 0.3)"
+  >
+    {/* Liquid Emerald Background Orb */}
+    <motion.div 
+      animate={{
+        borderRadius: [
+          "50% 50% 40% 60% / 60% 40% 60% 40%",
+          "40% 60% 50% 50% / 40% 60% 40% 60%",
+          "50% 50% 40% 60% / 60% 40% 60% 40%"
+        ],
+        scale: [1, 1.15, 1],
+      }}
+      transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -inset-10 bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-green-400/20 blur-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none" 
+    />
+    
+    {/* Top Specular Arc */}
+    <div className="absolute inset-x-8 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent pointer-events-none" />
+
+    <div className="relative z-10 flex flex-col items-center text-center p-8 sm:p-10 md:p-12">
+      
+      {/* Floating Organic Liquid Droplet */}
+      <motion.div 
+        animate={{ y: [-6, 6, -6] }} 
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="relative"
+        className="relative mb-6"
       >
-        <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full" />
-        <div className="relative p-5 rounded-full bg-green-500/10 border border-green-500/30 text-green-500 dark:text-green-400 shadow-[0_0_20px_rgba(34,197,94,0.2)] mb-6">
-          <MessageCircle className="w-10 h-10 drop-shadow-[0_0_10px_rgba(34,197,94,0.8)]" />
+        <div className="absolute inset-0 bg-emerald-500/30 blur-2xl rounded-full" />
+        <div className="relative p-5 rounded-[2rem] bg-emerald-500/15 border border-emerald-500/40 text-emerald-500 dark:text-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.4)] backdrop-blur-2xl">
+          <MessageCircle className="w-10 h-10 drop-shadow-[0_0_15px_rgba(16,185,129,0.9)]" />
         </div>
       </motion.div>
 
-      <h3 className="text-2xl md:text-3xl font-bold dark:text-white text-slate-900 mb-3 tracking-wide">
-        Fastest Response
+      <h3 className="text-2xl sm:text-3xl md:text-4xl font-black dark:text-white text-slate-900 mb-3 tracking-tight">
+        Instant Messaging Channel
       </h3>
-      <p className="dark:text-gray-400 text-slate-600 max-w-md mb-8 text-lg">
-        For urgent inquiries or quick discussions, reach out directly on WhatsApp.
+      
+      <p className="dark:text-slate-300 text-slate-600 max-w-lg mb-8 text-base md:text-lg leading-relaxed font-normal">
+        For immediate syncs, quick technical consultations, or real-time project inquiries, connect directly on WhatsApp.
       </p>
       
-      <div className="relative group/btn mt-2">
-        {/* Continuous Pulse Rings */}
-        <div className="absolute inset-0 rounded-full bg-green-500/30 animate-ping" style={{ animationDuration: '3s' }} />
-        <div className="absolute -inset-2 rounded-full bg-green-500/20 blur-xl opacity-50 group-hover/btn:opacity-100 transition-opacity duration-500" />
+      <div className="relative group/btn">
+        <div className="absolute inset-0 rounded-full bg-emerald-500/30 animate-ping" style={{ animationDuration: '3s' }} />
+        <div className="absolute -inset-2 rounded-full bg-emerald-500/30 blur-xl opacity-60 group-hover/btn:opacity-100 transition-opacity duration-500" />
 
         <motion.a 
           href="https://wa.me/918252995548" 
           target="_blank" 
           rel="noopener noreferrer"
-          whileHover="hover"
-          initial="initial"
-          variants={{
-            initial: { scale: 1 },
-            hover: { scale: 1.05 }
-          }}
+          whileHover={{ scale: 1.06, y: -3 }}
           whileTap={{ scale: 0.95 }}
-          className="relative flex items-center gap-3 px-8 py-4 rounded-full backdrop-blur-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/5 border border-green-400/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_0_20px_rgba(34,197,94,0.2)] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_0_40px_rgba(34,197,94,0.6)] hover:border-green-300/60 transition-all duration-300 overflow-hidden"
+          className="relative flex items-center gap-3 px-9 py-4.5 rounded-full backdrop-blur-3xl bg-gradient-to-r from-emerald-600 via-green-500 to-teal-600 bg-[length:200%_auto] hover:bg-right text-white font-extrabold tracking-wide shadow-[0_12px_35px_rgba(16,185,129,0.45)] hover:shadow-[0_18px_50px_rgba(16,185,129,0.7)] border border-white/30 transition-all duration-500 overflow-hidden"
         >
-          {/* Liquid Glass Shimmer */}
           <motion.div
-            className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
-            variants={{
-              hover: { translateX: "200%", transition: { duration: 1.5, ease: "easeInOut", repeat: Infinity, repeatDelay: 0.2 } }
-            }}
+            className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+            animate={{ translateX: ["-100%", "200%"] }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
           />
-          
-          <MessageCircle className="w-6 h-6 relative z-10 text-green-500 dark:text-green-300 drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
-          <span className="relative z-10 text-green-600 dark:text-green-300 font-bold tracking-wide drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
-            CHAT DIRECTLY ON WhatsApp
+          <MessageCircle className="w-5 h-5 relative z-10 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+          <span className="relative z-10 text-white font-black tracking-wider uppercase text-sm">
+            Chat on WhatsApp
           </span>
         </motion.a>
       </div>
@@ -146,68 +358,96 @@ const SocialIcon = ({ href, icon: Icon, label, index }: { href: string, icon: an
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    initial={{ opacity: 0, scale: 0.5 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-    whileHover={{ scale: 1.05, y: -2 }}
-    whileTap={{ scale: 0.95 }}
+    variants={itemPop}
+    whileHover={{ scale: 1.12, y: -4 }}
+    whileTap={{ scale: 0.94 }}
     className="flex flex-col items-center gap-2 group"
     aria-label={label}
   >
-    <div className="p-3 rounded-full dark:bg-white/5 bg-black/5 border dark:border-white/10 border-black/10 dark:text-gray-400 text-slate-600 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all duration-300">
+    <div className="p-3.5 rounded-2xl bg-white/50 dark:bg-white/5 backdrop-blur-xl border border-white/60 dark:border-white/10 dark:text-slate-400 text-slate-600 group-hover:text-cyan-400 group-hover:bg-cyan-500/15 group-hover:border-cyan-400/50 group-hover:shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300">
       <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
     </div>
-    <span className="text-xs font-medium dark:text-gray-500 text-slate-500 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors">
+    <span className="text-xs font-bold dark:text-slate-400 text-slate-600 group-hover:text-cyan-400 transition-colors">
       {label}
     </span>
   </motion.a>
 );
 
-export const ContactFooter = () => {
+export const ContactFooter: React.FC = () => {
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 2800);
+  };
+
   return (
     <motion.section 
       id="contact" 
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8 }}
-      className="relative pt-24 pb-12 dark:bg-[#050505] bg-slate-50 overflow-hidden z-10 transition-colors duration-300"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-70px" }}
+      className="relative pt-24 pb-12 bg-transparent overflow-hidden z-10 transition-colors duration-300"
     >
-      {/* Subtle radial gradient background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(6,182,212,0.05)_0%,transparent_70%)] pointer-events-none" />
+      {/* Toast Notification for Clipboard */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+          >
+            <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 dark:bg-slate-950/95 text-white backdrop-blur-2xl border border-cyan-500/50 shadow-[0_15px_35px_rgba(6,182,212,0.4)] text-xs font-bold tracking-wide">
+              <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+              <span>{toastMessage}</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="container px-4 md:px-6 mx-auto max-w-5xl space-y-10 relative z-10">
+        <motion.div variants={itemFadeUp}>
+          <LiquidLetsConnectCard onToast={showToast} />
+        </motion.div>
+        
+        <motion.div variants={itemFadeUp}>
+          <LiquidWhatsAppCard />
+        </motion.div>
+      </div>
       
+      {/* Bottom Footer Glass Strip with Staggered Elements */}
       <motion.div 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
-        }}
-        className="container px-4 md:px-6 mx-auto max-w-5xl space-y-8 relative z-10"
+        variants={itemFadeUp}
+        className="mt-24 border-t dark:border-white/10 border-black/10 pt-8 relative z-10"
       >
-        <ContactCard />
-        <WhatsAppCard />
-      </motion.div>
-      
-      {/* Copyright / Small Footer Bottom */}
-      <div className="mt-24 border-t dark:border-white/10 border-black/10 pt-8 relative z-10">
         <div className="container px-4 md:px-6 mx-auto max-w-5xl flex flex-col md:flex-row justify-between items-center gap-8 md:gap-6">
-          <div className="flex items-center gap-6 md:gap-4">
-            <SocialIcon href="mailto:developer@imprince.me" icon={Mail} label="Email" index={0} />
+          <div className="flex items-center gap-5 sm:gap-6">
+            <SocialIcon href="mailto:kusprince.raj@gmail.com" icon={Mail} label="Email" index={0} />
             <SocialIcon href="https://github.com/pkskkumar900-debug" icon={Github} label="GitHub" index={1} />
             <SocialIcon href="https://www.linkedin.com/in/prince-raj-ba4b973b3?utm_source=share_via&utm_content=profile&utm_medium=member_android" icon={Linkedin} label="LinkedIn" index={2} />
             <SocialIcon href="https://instagram.com/princerjjjjj" icon={Instagram} label="Instagram" index={3} />
           </div>
-          <p className="dark:text-gray-500 text-slate-500 text-sm text-center md:text-left">
-            © {new Date().getFullYear()} Prince Raj. All rights reserved.
-          </p>
-          <div className="dark:text-gray-600 text-slate-400 text-xs flex items-center gap-1">
-            Designed with <span className="text-cyan-500 animate-pulse">❤</span> for the future
+          
+          <div className="text-center md:text-left">
+            <p className="dark:text-slate-400 text-slate-600 text-sm font-semibold">
+              © {new Date().getFullYear()} <span className="text-cyan-500 font-bold">ImPrince Tectra</span> (Prince Raj).
+            </p>
+            <p className="dark:text-slate-500 text-slate-400 text-xs mt-0.5">
+              All intellectual property & computational models reserved.
+            </p>
+          </div>
+
+          <div className="dark:text-slate-500 text-slate-500 text-xs flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Crafted for the Intelligent Era</span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.section>
   );
 };

@@ -1,5 +1,8 @@
 {
-  "name": "ImPrince RIS",
-  "description": "Official portfolio of Prince Raj, an AI Developer specializing in building intelligent systems, automation frameworks, and data-driven solutions.",
-  "requestFramePermissions": []
+  "name": "ImPrince Tectra",
+  "description": "Official 3D glassmorphism portfolio of Prince Raj (ImPrince Tectra), an AI Developer & Quantitative Trader specializing in autonomous agent systems and algorithmic models.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

@@ -13,6 +13,7 @@ import { AboutSection } from './components/AboutSection';
 import { SkillsSection } from './components/SkillsSection';
 import { CredentialsSection } from './components/CredentialsSection';
 import { ContactFooter } from './components/ui/contact-footer';
+import { ProfileChatbot } from './components/ui/ProfileChatbot';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         </main>
         
         <ContactFooter />
+        <ProfileChatbot />
       </div>
     </ThemeProvider>
   );
