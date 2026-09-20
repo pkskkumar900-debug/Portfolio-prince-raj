@@ -14,26 +14,34 @@ import { SkillsSection } from './components/SkillsSection';
 import { CredentialsSection } from './components/CredentialsSection';
 import { ContactFooter } from './components/ui/contact-footer';
 import { ProfileChatbot } from './components/ui/ProfileChatbot';
+import { ChatPage } from './components/ChatPage';
+import { useNavigation } from './lib/navigation';
 
 export default function App() {
+  const { pathname, navigate } = useNavigation();
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div className="min-h-screen bg-background text-foreground selection:bg-blue-500/30 font-sans overflow-x-hidden transition-colors duration-300">
-        <CursorGlow />
-        <NeuralVortexBackground />
-        
-        <Navbar />
-        
-        <main className="relative z-10 pt-16">
-          <HeroSection />
-          <AboutSection />
-          <SkillsSection />
-          <CredentialsSection />
-        </main>
-        
-        <ContactFooter />
-        <ProfileChatbot />
-      </div>
+      {pathname === '/chat' ? (
+        <ChatPage onNavigate={navigate} />
+      ) : (
+        <div className="min-h-screen bg-background text-foreground selection:bg-blue-500/30 font-sans overflow-x-hidden transition-colors duration-300">
+          <CursorGlow />
+          <NeuralVortexBackground />
+          
+          <Navbar />
+          
+          <main className="relative z-10 pt-16">
+            <HeroSection />
+            <AboutSection />
+            <SkillsSection />
+            <CredentialsSection />
+          </main>
+          
+          <ContactFooter />
+          <ProfileChatbot onNavigate={navigate} />
+        </div>
+      )}
     </ThemeProvider>
   );
 }

@@ -45,7 +45,11 @@ const INITIAL_MESSAGES: ChatMessage[] = [
   },
 ];
 
-export const ProfileChatbot: React.FC = () => {
+interface ProfileChatbotProps {
+  onNavigate?: (to: string) => void;
+}
+
+export const ProfileChatbot: React.FC<ProfileChatbotProps> = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES);
@@ -236,6 +240,22 @@ export const ProfileChatbot: React.FC = () => {
 
               {/* Window Controls */}
               <div className="flex items-center gap-1">
+                <button
+                  id="chatbot-fullpage-btn"
+                  onClick={() => {
+                    setIsOpen(false);
+                    if (onNavigate) {
+                      onNavigate('/chat');
+                    } else {
+                      window.history.pushState({}, '', '/chat');
+                      window.dispatchEvent(new PopStateEvent('popstate'));
+                    }
+                  }}
+                  title="Open full page chat"
+                  className="p-1.5 text-slate-400 hover:text-cyan-300 hover:bg-slate-800/60 rounded-lg transition-colors cursor-pointer"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </button>
                 <button
                   id="chatbot-reset-btn"
                   onClick={handleReset}
