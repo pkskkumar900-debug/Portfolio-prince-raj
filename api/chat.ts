@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { GoogleGenAI } from '@google/genai';
 
 // Active Gemini model - configurable via environment variable, defaulting to gemini-2.5-flash
-export const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+export const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.6-flash';
 
 // Profile Knowledge Base for Gemini System Instruction
 export const SYSTEM_INSTRUCTION = `You are "Tectra AI", the official intelligent portfolio assistant for Prince Raj (brand: ImPrince Tectra).
