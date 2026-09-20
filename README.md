@@ -63,7 +63,7 @@ Frontend
 
 AI
 
-- Google Gemini API
+- Google Gemini 3.6 API (Flash)
 - "@google/genai"
 
 Backend

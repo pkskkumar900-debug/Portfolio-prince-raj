@@ -399,7 +399,7 @@ export const ProfileChatbot: React.FC = () => {
                   <div className="flex items-center justify-between mt-2 px-1 text-[10px] text-slate-500">
                     <span className="flex items-center gap-1">
                       <Sparkles className="w-2.5 h-2.5 text-cyan-400" />
-                      Powered by Gemini Flash & Profile Knowledge Base
+                      Powered by Gemini 3.6 & Profile Knowledge Base
                     </span>
                     <span>IIT Patna • ImPrince Tectra</span>
                   </div>
