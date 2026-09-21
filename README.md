@@ -19,7 +19,7 @@
     <img src="https://img.shields.io/badge/💬%20Tectra%20AI%20Chat-Launch%20Assistant-06B6D4?style=for-the-badge&logo=openai&logoColor=white" alt="Tectra AI Chat" />
   </a>
   &nbsp;
-  <a href="https://github.com/pkskkumar900-debug/Portfolio-prince-raj">
+  <a href="https://github.com/princeraj-in/Portfolio-prince-raj">
     <img src="https://img.shields.io/badge/💻%20Source%20Code-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="Source Code" />
   </a>
   &nbsp;
@@ -175,7 +175,7 @@ Portfolio-prince-raj/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/pkskkumar900-debug/Portfolio-prince-raj.git
+git clone https://github.com/princeraj-in/Portfolio-prince-raj.git
 cd Portfolio-prince-raj
 ```
 
@@ -282,8 +282,8 @@ Have an ambitious project, an autonomous AI challenge, or a quantitative enginee
     <img src="https://img.shields.io/badge/LinkedIn-Prince_Raj-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Profile" />
   </a>
   &nbsp;
-  <a href="https://github.com/pkskkumar900-debug">
-    <img src="https://img.shields.io/badge/GitHub-pkskkumar900--debug-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Profile" />
+  <a href="https://github.com/princeraj-in">
+    <img src="https://img.shields.io/badge/GitHub-princeraj--in-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Profile" />
   </a>
 </p>
 

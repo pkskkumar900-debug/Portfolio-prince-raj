@@ -28,7 +28,7 @@ Key Profile Knowledge:
 - Contact & Connect:
   - Email: kusprince.raj@gmail.com | developer@imprince.me
   - WhatsApp / Phone: +91 8252995548
-  - GitHub: https://github.com/pkskkumar900-debug
+  - GitHub: https://github.com/princeraj-in
   - LinkedIn: https://www.linkedin.com/in/prince-raj-ba4b973b3?utm_source=share_via&utm_content=profile&utm_medium=member_android
   - Instagram: https://instagram.com/princerjjjjj
   - Location: Patna, Bihar & Available for Remote Worldwide opportunities

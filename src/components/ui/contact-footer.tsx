@@ -273,7 +273,7 @@ const LiquidLetsConnectCard = ({ onToast }: { onToast: (msg: string) => void }) 
             icon={Globe} 
             label="Brand Identity" 
             value="ImPrince Tectra" 
-            href="https://github.com/pkskkumar900-debug"
+            href="https://github.com/princeraj-in"
             canCopy={false}
           />
         </div>
@@ -428,7 +428,7 @@ export const ContactFooter: React.FC = () => {
         <div className="container px-4 md:px-6 mx-auto max-w-5xl flex flex-col md:flex-row justify-between items-center gap-8 md:gap-6">
           <div className="flex items-center gap-5 sm:gap-6">
             <SocialIcon href="mailto:kusprince.raj@gmail.com" icon={Mail} label="Email" index={0} />
-            <SocialIcon href="https://github.com/pkskkumar900-debug" icon={Github} label="GitHub" index={1} />
+            <SocialIcon href="https://github.com/princeraj-in" icon={Github} label="GitHub" index={1} />
             <SocialIcon href="https://www.linkedin.com/in/prince-raj-ba4b973b3?utm_source=share_via&utm_content=profile&utm_medium=member_android" icon={Linkedin} label="LinkedIn" index={2} />
             <SocialIcon href="https://instagram.com/princerjjjjj" icon={Instagram} label="Instagram" index={3} />
           </div>
